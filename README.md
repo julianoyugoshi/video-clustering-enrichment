@@ -275,7 +275,7 @@ source venv/bin/activate        # Linux/macOS
 ```bash
 pip install -r requirements.txt
 ```
-#4. Configure API keys
+# 4. Configure API keys
 ```bash 
 # OPENROUTER_API_KEY=your_key_here  
 # OPENAI_API_KEY=your_key_here
