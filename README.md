@@ -281,7 +281,7 @@ pip install -r requirements.txt
 # OPENAI_API_KEY=your_key_here
 ```
 
-Citation  
+### Citation  
 ```bibtex
 
 ```
