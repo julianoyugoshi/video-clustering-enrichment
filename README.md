@@ -8,7 +8,7 @@
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Dataset: MSR-VTT](https://img.shields.io/badge/Dataset-MSR--VTT-orange.svg)](https://www.microsoft.com/en-us/research/publication/msr-vtt-a-large-video-description-dataset-for-bridging-video-and-language/)
-[![KDMiLe 2026](https://img.shields.io/badge/Venue-KDMiLe%202026-red.svg)]()
+# [![KDMiLe 2026](https://img.shields.io/badge/Venue-KDMiLe%202026-red.svg)]()
 
 ---
 
