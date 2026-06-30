@@ -287,7 +287,7 @@ pip install -r requirements.txt
   title       = {LLM-based Description Enrichment for Short Video Clustering},
   author      = {Yugoshi, Juliano and Marcacini, Ricardo},
   booktitle   = {Symposium on Knowledge Discovery, Mining and Learning (KDMiLe)},
-  year        = {2025},
+  year        = {2026},
   address     = {Brazil},
   institution = {Institute of Mathematics and Computer Science, University of São Paulo}
 }
