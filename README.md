@@ -282,7 +282,7 @@ pip install -r requirements.txt
 ```
 
 ## Citation  
-
+````bash
  @inproceedings{yugoshi2025llmenrichment,
   title     = {LLM-based Description Enrichment for Short Video Clustering},
   author    = {Yugoshi, Juliano and Marcacini, Ricardo},
@@ -291,7 +291,7 @@ pip install -r requirements.txt
   address   = {Brazil},
   institution = {Institute of Mathematics and Computer Science, University of São Paulo}
 }
-
+`````
 ## Acknowledgements
 - ICMC-USP
 - UFMS-CPTL
