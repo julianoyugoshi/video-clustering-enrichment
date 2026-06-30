@@ -1,6 +1,6 @@
 # LLM-based Description Enrichment for Short Video Clustering
 
-> **KDMiLe 2025** — Symposium on Knowledge Discovery, Mining and Learning
+> **KDMiLe 2026** — Symposium on Knowledge Discovery, Mining and Learning
 > Juliano Yugoshi · Ricardo Marcacini
 > Institute of Mathematics and Computer Science, University of São Paulo (ICMC-USP), Brazil
 > `{juliano.yugoshi, ricardo.marcacini}@usp.br`
@@ -256,6 +256,7 @@ video-clustering-enrichment/
 ├── test_captioner.py
 ├── test_enricher.py
 └── test_metrics.py
+
 ## Installation  
 
 ### 1. Clone the repository  
@@ -280,9 +281,23 @@ pip install -r requirements.txt
 # OPENAI_API_KEY=your_key_here
 ```
 
+## Citation  
 
+ @inproceedings{yugoshi2025llmenrichment,
+  title     = {LLM-based Description Enrichment for Short Video Clustering},
+  author    = {Yugoshi, Juliano and Marcacini, Ricardo},
+  booktitle = {Symposium on Knowledge Discovery, Mining and Learning (KDMiLe)},
+  year      = {2026},
+  address   = {Brazil},
+  institution = {Institute of Mathematics and Computer Science, University of São Paulo}
+}
 
-
- 
-
+## Acknowledgements
+- ICMC-USP
+- UFMS-CPTL
+- SmolVLM2 — Hugging Face
+- Qwen3-Embedding-8B — Alibaba DAMO Academy
+- OpenAI Text Embedding 3 Large — OpenAI
+- OpenRouter API — Unified LLM access
+- MSR-VTT Dataset — Microsoft Research
 
