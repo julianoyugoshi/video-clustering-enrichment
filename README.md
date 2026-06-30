@@ -216,8 +216,4 @@ pip install -r requirements.txt
 - ICMC-USP
 - UFMS-CPTL
 - SmolVLM2 — Hugging Face
-- Qwen3-Embedding-8B — Alibaba DAMO Academy
-- OpenAI Text Embedding 3 Large — OpenAI
-- OpenRouter API — Unified LLM access
-- MSR-VTT Dataset — Microsoft Research
 
