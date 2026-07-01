@@ -83,39 +83,6 @@ Clustering objective (K-Means):
 
 $\min_{\{\eta_k\}_{k=1}^K} \sum_{i=1}^n \min_{k \in \{1,\ldots,K\}} \left\| z_i^{(m,e)} - \eta_k \right\|_2^2$
 
-### Enrichment Prompt
-
-The following zero-shot prompt is applied uniformly to all LLMs:
-````bash
-You are a video classifier. Analyze the visual description and:
-  1.Choose EXACTLY ONE category from this list: {MSRVTT_CATS}
-  2.Propose a NEW free-form category, not in the list.
-  3.Provide a brief justification in English.
-  4.Provide an Enriched Description in English.
-Return ONLY valid JSON format exactly like this:
-{
-"predicted_category": "...",
-"suggested_category": "...",
-"justification": "...",
-"enriched_description": "..."
-}
-````
-Only the `enriched_description` field is used for downstream embedding and clustering.
-
-### Experimental Components
-
-| Component | Model / Method | Details |
-|---|---|---|
-| Description generation | SmolVLM2 | 2.7B parameters, 1 FPS sampling |
-| Semantic enrichment | Gemini Flash 2.5 | Zero-shot, JSON output via OpenRouter |
-| Semantic enrichment | Claude 3 Haiku | Zero-shot, JSON output via OpenRouter |
-| Semantic enrichment | Llama 3.3 70B | Zero-shot, JSON output via OpenRouter |
-| Embedding (E1) | Qwen Embedding 8B | 4,096 dimensions |
-| Embedding (E2) | OpenAI Text Embedding 3 Large | 3,072 dimensions |
-| Preprocessing | StandardScaler | Applied before clustering |
-| Clustering | K-Means | K=20, k-means++ init |
-
----
 
 ## Results
 
