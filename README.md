@@ -9,15 +9,6 @@
 [![Dataset: MSR-VTT](https://img.shields.io/badge/Dataset-MSR--VTT-orange.svg)](https://www.microsoft.com/en-us/research/publication/msr-vtt-a-large-video-description-dataset-for-bridging-video-and-language/)
 
 
----
-
-<p align="center">
-  <img src="results/figures/figura1.png" alt="5-Step Video Analysis Pipeline" width="820"/>
-  <br/>
-  <em>Figure 1 — The proposed method implements a 5-step pipeline: from raw short-video collection to unsupervised semantic clustering via compact VLM captioning, LLM-based description enrichment, and dense text embedding.</em>
-</p>
-
----
 
 ## 📌 Table of Contents
 
@@ -76,6 +67,17 @@ goal is to learn a clustering assignment $g : \mathcal{V} \rightarrow \{1, 2, \l
 function $f : \mathcal{V} \rightarrow \mathbb{R}^d$.
 
 ### Pipeline
+
+---
+
+<p align="center">
+  <img src="results/figures/figura1.png" alt="5-Step Video Analysis Pipeline" width="820"/>
+  <br/>
+  <em>Figure 1 — The proposed method implements a 5-step pipeline: from raw short-video collection to unsupervised semantic clustering via compact VLM captioning, LLM-based description enrichment, and dense text embedding.</em>
+</p>
+
+---
+
 
 The full representation is defined as:
 
