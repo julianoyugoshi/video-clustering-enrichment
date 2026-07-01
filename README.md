@@ -1,8 +1,8 @@
 # LLM-based Description Enrichment for Short Video Clustering
 
-> **KDMiLe 2026** — Symposium on Knowledge Discovery, Mining and Learning
-> Juliano Yugoshi · Ricardo Marcacini
-> Institute of Mathematics and Computer Science, University of São Paulo (ICMC-USP), Brazil
+> **KDMiLe 2026** — Symposium on Knowledge Discovery, Mining and Learning<br>
+> Juliano Yugoshi · Ricardo Marcacini<br>
+> Institute of Mathematics and Computer Science, University of São Paulo (ICMC-USP), Brazil<br>
 > `{juliano.yugoshi, ricardo.marcacini}@usp.br`
 
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
