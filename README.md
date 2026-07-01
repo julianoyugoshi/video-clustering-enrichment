@@ -15,7 +15,7 @@
 <p align="center">
   <img src="results/figures/figura1.png" alt="5-Step Video Analysis Pipeline" width="820"/>
   <br/>
-  <em>Figure 1 — Proposed 5-step pipeline: from raw short-video collection to unsupervised semantic clustering via compact VLM captioning, LLM enrichment, and dense text embedding.</em>
+  <em>Figure 1 — The proposed method implements a 5-step pipeline: from raw short-video collection to unsupervised semantic clustering via compact VLM captioning, LLM-based description enrichment, and dense text embedding.</em>
 </p>
 
 ---
