@@ -96,7 +96,7 @@ $\min_{\{\eta_k\}_{k=1}^K} \sum_{i=1}^n \min_{k \in \{1,\ldots,K\}} \left\| z_i^
 ### Enrichment Prompt
 
 The following zero-shot prompt is applied uniformly to all LLMs:
-
+````bash
 You are a video classifier. Analyze the visual description and:
   1.Choose EXACTLY ONE category from this list: {MSRVTT_CATS}
   2.Propose a NEW free-form category, not in the list.
@@ -109,6 +109,7 @@ Return ONLY valid JSON format exactly like this:
 "justification": "...",
 "enriched_description": "..."
 }
+````
 Only the `enriched_description` field is used for downstream embedding and clustering.
 
 ### Experimental Components
