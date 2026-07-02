@@ -379,7 +379,7 @@ After a complete run, the `outputs/` directory contains:
 To skip the heavy processing steps, all pre-computed checkpoints, embeddings and outputs
 from the paper's experimental run are available for download:
 
-📁 **[Archives-LLMenrichment — Google Drive (read-only)](https://drive.google.com/drive/folders/SEU_LINK_AQUI)**
+📁 **[Archives-LLMenrichment — Google Drive (read-only)](https://drive.google.com/drive/folders/1HyXYqyRVwhKU84PVjFI01HqYkDo61enR?usp=sharing)**
 
 After downloading, place the files in `MSRVTT_Workspace/outputs/` before running:
 
