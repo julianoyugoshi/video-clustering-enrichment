@@ -438,16 +438,6 @@ This work uses the **MSR-VTT** dataset:
 
 If you use this code or findings in your research, please cite:
 
-    @inproceedings{yugoshi2026llm,
-      title        = {LLM-based Description Enrichment for Short Video Clustering},
-      author       = {Yugoshi, Juliano and Marcacini, Ricardo},
-      booktitle    = {Proceedings of the Symposium on Knowledge Discovery,
-                      Mining and Learning (KDMiLe)},
-      year         = {2026},
-      address      = {Brazil},
-      institution  = {Institute of Mathematics and Computer Science,
-                      University of Sao Paulo (ICMC-USP)}
-    }
 
 ---
 
@@ -458,10 +448,6 @@ This work was carried out at:
 - **ICMC-USP** — Institute of Mathematics and Computer Science, University of Sao Paulo
 - **UFMS-CPTL** — Federal University of Mato Grosso do Sul
 
-Models and infrastructure:
-
-- [SmolVLM2](https://huggingface.co/HuggingFaceTB/SmolVLM2-2.2B-Instruct) — Hugging Face
-- [OpenRouter](https://openrouter.ai/) — Unified LLM API Gateway
 
 ---
 
