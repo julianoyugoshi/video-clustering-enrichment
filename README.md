@@ -4,12 +4,7 @@
 > Institute of Mathematics and Computer Science, University of São Paulo (ICMC-USP), Brazil<br>
 > `{juliano.yugoshi, ricardo.marcacini}@usp.br`
 
-[![Installation](https://img.shields.io/badge/🛠️-Installation-yellow?style=flat-square)](#installation)  
-[![Usage](https://img.shields.io/badge/▶️-Usage-blue?style=flat-square)](#usage)  
-[![Configuration](https://img.shields.io/badge/⚙️-Configuration-orange?style=flat-square)](#configuration)  
-[![Generated Outputs](https://img.shields.io/badge/📁-Generated_Outputs-lightgrey?style=flat-square)](#generated-outputs)  
-[![Pre-computed Files](https://img.shields.io/badge/💾-Pre--computed_Files-ff69b4?style=flat-square)](#pre-computed-files)  
-[![Dataset](https://img.shields.io/badge/🗄️-Dataset-orange?style=flat-square)](#dataset)  
+[![Installation](https://img.shields.io/badge/🛠️-Installation-yellow?style=flat-square)](#installation)[![Usage](https://img.shields.io/badge/▶️-Usage-blue?style=flat-square)](#usage)[![Configuration](https://img.shields.io/badge/⚙️-Configuration-orange?style=flat-square)](#configuration)[![Generated Outputs](https://img.shields.io/badge/📁-Generated_Outputs-lightgrey?style=flat-square)](#generated-outputs)[![Pre-computed Files](https://img.shields.io/badge/💾-Pre--computed_Files-ff69b4?style=flat-square)](#pre-computed-files)[![Dataset](https://img.shields.io/badge/🗄️-Dataset-orange?style=flat-square)](#dataset)
 
 ---
 
