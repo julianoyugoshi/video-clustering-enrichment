@@ -4,10 +4,12 @@
 > Institute of Mathematics and Computer Science, University of São Paulo (ICMC-USP), Brazil<br>
 > `{juliano.yugoshi, ricardo.marcacini}@usp.br`
 
-[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Dataset: MSR-VTT](https://img.shields.io/badge/Dataset-MSR--VTT-orange.svg)](https://drive.google.com/file/d/1C0r5WHKiTLYWxZkZI8DKpsN5Mj9s3Z1x/view?usp=sharing/)
-
+[![Installation](https://img.shields.io/badge/🛠️-Installation-yellow?style=flat-square)](#installation)  
+[![Usage](https://img.shields.io/badge/▶️-Usage-blue?style=flat-square)](#usage)  
+[![Configuration](https://img.shields.io/badge/⚙️-Configuration-orange?style=flat-square)](#configuration)  
+[![Generated Outputs](https://img.shields.io/badge/📁-Generated_Outputs-lightgrey?style=flat-square)](#generated-outputs)  
+[![Pre-computed Files](https://img.shields.io/badge/💾-Pre--computed_Files-ff69b4?style=flat-square)](#pre-computed-files)  
+[![Dataset](https://img.shields.io/badge/🗄️-Dataset-orange?style=flat-square)](#dataset)  
 
 ---
 
