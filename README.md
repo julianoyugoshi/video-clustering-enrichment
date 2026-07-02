@@ -159,43 +159,26 @@ semantic enrichment benefit beyond the fixed evaluation point.
 
 ---
 
-## Repository Structure
-
-    video-clustering-enrichment/
-    |
-    |-- code-llm_based_description_enrichment.ipynb   # Main pipeline (Google Colab)
-    |-- requirements.txt                               # Python dependencies
-    |-- README.md
-    |-- LICENSE
-    |
-    |-- results/
-    |   └── figures/
-    |       |-- 08_hypothesis_testing_qwen.png
-    |       |-- 08_hypothesis_testing_openai.png
-    |       |-- 09_k_sensitivity_sidebyside_2embeddings.png
-    |       └── 09_k_sensitivity_overlay_2embeddings.png
-    |
-    └── MSRVTT_Workspace/                  # Created automatically on Google Drive
-        |-- MSRVTT_Videos.zip              # MSR-VTT video files (user-provided)
-        |-- MSR_VTT.json                   # MSR-VTT annotation file (user-provided)
-        └── outputs/
-            |-- MSRVTT_base.csv
-            |-- MSRVTT_dados_multillm.csv
-            |-- embeddings/
-            |   |-- smolvlm_qwen_embeddings.npy
-            |   |-- smolvlm_openai_embeddings.npy
-            |   |-- gemini_qwen_embeddings.npy
-            |   └── ...
-            |-- stage2_smolvlm_checkpoint.csv
-            |-- stage3_llm_checkpoint.csv
-            |-- 06_summary_metrics_consolidated.csv
-            |-- 07_hypothesis_testing.csv
-            |-- 07_stats_summary_QWEN.csv
-            |-- 07_stats_summary_OPENAI.csv
-            |-- 09_k_sensitivity_QWEN.csv
-            |-- 09_k_sensitivity_OPENAI.csv
-            |-- embeddings_metadata.json
-            └── FINAL_REPORT.txt
+MSRVTT_Workspace/                  # Created automatically on Google Drive
+    |-- MSRVTT_Videos.zip              # MSR-VTT video files (user-provided)
+    |-- MSR_VTT.json                   # MSR-VTT annotation file (user-provided)
+    └── outputs/
+        |-- MSRVTT_base.csv
+        |-- MSRVTT_dados_multillm.csv
+        |-- embeddings/
+        |   |-- smolvlm_qwen_embeddings.npy
+        |   |-- smolvlm_openai_embeddings.npy
+        |   |-- gemini_qwen_embeddings.npy
+        |   └── ...
+        |-- inference_checkpoint.csv      
+        |-- 06_summary_metrics_consolidated.csv
+        |-- 07_hypothesis_testing.csv
+        |-- 07_stats_summary_QWEN.csv
+        |-- 07_stats_summary_OPENAI.csv
+        |-- 09_k_sensitivity_QWEN.csv
+        |-- 09_k_sensitivity_OPENAI.csv
+        |-- embeddings_metadata.json
+        └── FINAL_REPORT.txt
 
 ---
 
@@ -339,11 +322,12 @@ To skip a stage, place the corresponding pre-computed file in `outputs/` before 
 
 | Stage | Skip Condition | File Required |
 |---|---|---|
-| Cell 4 — SmolVLM2 descriptions | File exists | `outputs/stage2_smolvlm_checkpoint.csv` |
-| Cell 5 — LLM enrichment | File exists | `outputs/stage3_llm_checkpoint.csv` |
+| Cell 4 — SmolVLM2 descriptions | Campo `desc_smolvlm` preenchido no CSV | `outputs/MSRVTT_base.csv` (com campo `desc_smolvlm` já populado) |
+| Cell 5 — LLM enrichment | File exists | `outputs/inference_checkpoint.csv` |
 | Cell 6 — Text embeddings | All .npy files exist | `outputs/embeddings/{source}_{model}_embeddings.npy` |
 | Cell 8 — Clustering stats | Both CSVs exist | `outputs/07_stats_summary_QWEN.csv` + `07_stats_summary_OPENAI.csv` |
 | Cell 10 — K-Sensitivity | All 4 files exist | `09_k_sensitivity_QWEN.csv`, `09_k_sensitivity_OPENAI.csv` + both PNGs |
+
 
 > 📁 All pre-computed files from the paper's experimental run are available for download — see [Pre-computed Files](#pre-computed-files) below.
 
@@ -398,9 +382,10 @@ After a complete run, the `outputs/` directory contains:
 
 | File | Description |
 |---|---|
-| `MSRVTT_base.csv` | Base dataset with video IDs, categories, human captions |
+| `MSRVTT_base.csv` | Base dataset com video IDs, categories, human captions and **SmolVLM2 descriptions** (campo `desc_smolvlm`) |
 | `MSRVTT_dados_multillm.csv` | Full dataset with SmolVLM2 + all LLM enriched descriptions |
 | `embeddings/{source}_{model}_embeddings.npy` | Text embedding arrays (8 files total) |
+| `inference_checkpoint.csv` | Checkpoint do LLM enrichment (era `stage3_llm_checkpoint.csv`) |
 | `00_llm_predicted_categories_validation.csv` | LLM category prediction validity rates |
 | `00_llm_categories_vs_groundtruth.csv` | LLM category hit rate vs. ground truth |
 | `06_summary_metrics_consolidated.csv` | NMI/ARI statistics for all configurations |
@@ -414,6 +399,7 @@ After a complete run, the `outputs/` directory contains:
 | `embeddings_metadata.json` | Metadata for reproducibility |
 | `FINAL_REPORT.txt` | Full experiment summary with all tables |
 
+
 ---
 
 ## Pre-computed Files
@@ -422,10 +408,7 @@ To skip the heavy processing steps, all pre-computed checkpoints, embeddings and
 from the paper's experimental run are available for download:
 
 
-📁 **[Archives-LLMenrichment — Google Drive (read-only)](https://drive.google.com/drive/folders/SEU_LINK_AQUI)**
-=======
 📁 **[Archives-LLMenrichment — Google Drive (read-only)](https://drive.google.com/drive/folders/1HyXYqyRVwhKU84PVjFI01HqYkDo61enR?usp=sharing)**
-
 
 After downloading, place the files in `MSRVTT_Workspace/outputs/` before running:
 
@@ -433,10 +416,9 @@ After downloading, place the files in `MSRVTT_Workspace/outputs/` before running
     |-- MSRVTT_Videos.zip
     └── MSR_VTT.json
     └── outputs/
-        ├── MSRVTT_base.csv
+        ├── MSRVTT_base.csv                    ← inclui desc_smolvlm já populado
         ├── MSRVTT_dados_multillm.csv
-        ├── stage2_smolvlm_checkpoint.csv
-        ├── stage3_llm_checkpoint.csv
+        ├── inference_checkpoint.csv           ← era stage3_llm_checkpoint.csv
         ├── 06_summary_metrics_consolidated.csv
         ├── 07_hypothesis_testing.csv
         ├── 07_stats_summary_QWEN.csv
@@ -457,11 +439,12 @@ After downloading, place the files in `MSRVTT_Workspace/outputs/` before running
 
 | File | Skips Stage |
 |---|---|
-| `stage2_smolvlm_checkpoint.csv` | Cell 4 — SmolVLM2 descriptions |
-| `stage3_llm_checkpoint.csv` | Cell 5 — LLM enrichment |
-| `embeddings/*.npy` | Cell 6 — Text embeddings |
-| `07_stats_summary_QWEN/OPENAI.csv` | Cell 8 — Clustering stats |
-| `09_k_sensitivity_*.csv` + PNGs | Cell 10 — K-Sensitivity |
+| `MSRVTT_base.csv` (com `desc_smolvlm` populado) | Cell 4 — SmolVLM2 descriptions |
+| `inference_checkpoint.csv`                       | Cell 5 — LLM enrichment |
+| `embeddings/*.npy`                               | Cell 6 — Text embeddings |
+| `07_stats_summary_QWEN/OPENAI.csv`               | Cell 8 — Clustering stats |
+| `09_k_sensitivity_*.csv` + PNGs                  | Cell 10 — K-Sensitivity |
+
 
 ---
 
