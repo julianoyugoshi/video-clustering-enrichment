@@ -222,6 +222,50 @@ semantic enrichment benefit beyond the fixed evaluation point.
 #### 2. Set up Google Drive workspace
 
 On your Google Drive, create the following folder structure and upload the dataset files:
+> 💡 Instead of uploading manually, you can copy `MSRVTT_Videos.zip` and  `MSR_VTT.json` directly from the [Archives-LLMenrichment folder](#pre-computed-files) to your Drive workspace.
+
+    MyDrive/
+    └── MSRVTT_Workspace/
+        |-- MSRVTT_Videos.zip     <- MSR-VTT video archive
+        └── MSR_VTT.json          <- MSR-VTT annotation file
+
+#### 3. Set your API key in Colab Secrets
+
+<<<<<<< HEAD
+In the Colab sidebar, go to **Secrets** and add:
+
+    Name  : OPENROUTER_API_KEY
+    Value : your_openrouter_key_here
+
+#### 4. Run all cells in order
+
+    Cell 0  -> Install dependencies
+    Cell 1  -> Imports + Config + Paths
+    Cell 2  -> Utility functions
+    Cell 3  -> Mount Drive + Build base CSV
+    Cell 4  -> SmolVLM2 visual descriptions    <- GPU recommended
+    Cell 5  -> LLM enrichment (async)          <- API calls
+    Cell 6  -> Text embeddings (async)         <- API calls
+    Cell 7  -> Feature preparation
+    Cell 8  -> Multi-run KMeans clustering
+    Cell 9  -> Wilcoxon tests + Cohen's d
+    Cell 10 -> K-Sensitivity analysis
+    Cell 11 -> Final export + report
+
+### Option B — Local Installation
+
+#### 1. Clone the repository
+
+    git clone https://github.com/julianoyugoshi/video-clustering-enrichment.git
+    cd video-clustering-enrichment
+
+#### 2. Create and activate a virtual environment
+
+    python -m venv venv
+    source venv/bin/activate        # Linux/macOS
+    # venv\Scripts\activate         # Windows
+
+=======
 
     MyDrive/
     └── MSRVTT_Workspace/
@@ -263,6 +307,7 @@ In the Colab sidebar, go to **Secrets** and add:
     source venv/bin/activate        # Linux/macOS
     # venv\Scripts\activate         # Windows
 
+>>>>>>> 7627b6e (fix: README.md)
 #### 3. Install dependencies
 
     pip install -r requirements.txt
@@ -379,11 +424,20 @@ After a complete run, the `outputs/` directory contains:
 To skip the heavy processing steps, all pre-computed checkpoints, embeddings and outputs
 from the paper's experimental run are available for download:
 
+<<<<<<< HEAD
 📁 **[Archives-LLMenrichment — Google Drive (read-only)](https://drive.google.com/drive/folders/SEU_LINK_AQUI)**
+=======
+📁 **[Archives-LLMenrichment — Google Drive (read-only)](https://drive.google.com/drive/folders/1HyXYqyRVwhKU84PVjFI01HqYkDo61enR?usp=sharing)**
+>>>>>>> 7627b6e (fix: README.md)
 
 After downloading, place the files in `MSRVTT_Workspace/outputs/` before running:
 
     MSRVTT_Workspace/
+<<<<<<< HEAD
+=======
+    |-- MSRVTT_Videos.zip
+    └── MSR_VTT.json
+>>>>>>> 7627b6e (fix: README.md)
     └── outputs/
         ├── MSRVTT_base.csv
         ├── MSRVTT_dados_multillm.csv
@@ -438,6 +492,7 @@ This work uses the **MSR-VTT** dataset:
 
 If you use this code or findings in your research, please cite:
 
+<<<<<<< HEAD
     @inproceedings{yugoshi2026llm,
       title        = {LLM-based Description Enrichment for Short Video Clustering},
       author       = {Yugoshi, Juliano and Marcacini, Ricardo},
@@ -448,6 +503,9 @@ If you use this code or findings in your research, please cite:
       institution  = {Institute of Mathematics and Computer Science,
                       University of Sao Paulo (ICMC-USP)}
     }
+=======
+  
+>>>>>>> 7627b6e (fix: README.md)
 
 ---
 
@@ -458,11 +516,14 @@ This work was carried out at:
 - **ICMC-USP** — Institute of Mathematics and Computer Science, University of Sao Paulo
 - **UFMS-CPTL** — Federal University of Mato Grosso do Sul
 
+<<<<<<< HEAD
 Models and infrastructure:
 
 - [SmolVLM2](https://huggingface.co/HuggingFaceTB/SmolVLM2-2.2B-Instruct) — Hugging Face
 - [OpenRouter](https://openrouter.ai/) — Unified LLM API Gateway
 
+=======
+>>>>>>> 7627b6e (fix: README.md)
 ---
 
 ## License
