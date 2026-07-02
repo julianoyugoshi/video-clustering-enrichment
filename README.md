@@ -436,10 +436,10 @@ If you use this code or findings in your research, please cite:
 @inproceedings{yugoshi2026llm,
   title        = {LLM-based Description Enrichment for Short Video Clustering},
   author       = {Yugoshi, Juliano and Marcacini, Ricardo},
-  booktitle    = {Proceedings of the Symposium on Knowledge Discovery,
-                  Mining and Learning (KDMiLe)},
-  year         = {2026},
-  address      = {Brazil},
+  booktitle    = {Proceedings ,
+                  },
+  year         = {},
+  address      = {},
   institution  = {Institute of Mathematics and Computer Science,
                   University of Sao Paulo (ICMC-USP)}
 }
