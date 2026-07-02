@@ -1,26 +1,13 @@
-# Python
-__pycache__/
-*.py[cod]
-*.egg-info/
+# Ambiente
+.env
 venv/
-.env
 
-# Jupyter
-.ipynb_checkpoints/
-*.ipynb_checkpoints
+# Workspace e dados
+MSRVTT_Workspace/
 
-# Dados pesados (não subir no GitHub)
-*.mp4
-*.zip
+# Resultados locais
+results/
+
+# Arquivos pesados
 *.npy
-*.csv
-!results/**/*.csv
-
-# Credenciais
-.env
-secrets.py
-*_API_KEY*
-
-# Sistema
-.DS_Store
-Thumbs.db
+*.zip
