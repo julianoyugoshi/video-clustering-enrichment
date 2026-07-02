@@ -1,13 +1,15 @@
-# Ambiente
-.env
-venv/
+cd ~/video-clustering-enrichment
 
-# Workspace e dados
-MSRVTT_Workspace/
+# 1. Atualize o .gitignore
+# (edite o arquivo com as correções acima)
 
-# Resultados locais
-results/
+# 2. Force o Git a reindexar os arquivos antes ignorados
+git rm -r --cached results/
 
-# Arquivos pesados
-*.npy
-*.zip
+# 3. Adicione tudo novamente
+git add .gitignore
+git add results/figures/
+
+# 4. Commit e push
+git commit -m "fix: gitignore corrigido para versionar figures e ignorar results demais"
+git push origin main
