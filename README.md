@@ -417,13 +417,6 @@ MSRVTT_Workspace/
         └── llama_openai_embeddings.npy
 ```
 
-| File | Skips Stage |
-|---|---|
-| `MSRVTT_base.csv` (com `desc_smolvlm` populado) | Cell 4 — SmolVLM2 descriptions |
-| `inference_checkpoint.csv` | Cell 5 — LLM enrichment |
-| `embeddings/*.npy` | Cell 6 — Text embeddings |
-| `07_stats_summary_QWEN/OPENAI.csv` | Cell 8 — Clustering stats |
-| `09_k_sensitivity_*.csv` + PNGs | Cell 10 — K-Sensitivity |
 
 ---
 
