@@ -23,6 +23,7 @@
 - [Usage](#usage)
 - [Configuration](#configuration)
 - [Generated Outputs](#generated-outputs)
+- [Pre-computed Files](#pre-computed-files)
 - [Dataset](#dataset)
 - [Citation](#citation)
 - [Acknowledgements](#acknowledgements)
@@ -73,9 +74,7 @@ Clustering quality depends critically on the representation function f : V -> R^
 
 The full enriched representation is defined as:
 
-```
-f_{m,e}(v_i) = psi_e( T_m( phi(v_i), q ) )
-```
+    f_{m,e}(v_i) = psi_e( T_m( phi(v_i), q ) )
 
 where `phi` is the compact VLM captioner (SmolVLM2-2.2B), `T_m` is the LLM enrichment
 function for model `m` in {Gemini, Claude, Llama}, and `psi_e` is the text embedding
@@ -87,9 +86,7 @@ Before clustering, all feature vectors are standardized: `z = (x - mu) / sigma`.
 
 **Clustering objective (K-Means):**
 
-```
-min sum_{i=1}^{n} min_{k} || z_i^{(m,e)} - eta_k ||_2^2
-```
+    min sum_{i=1}^{n} min_{k} || z_i^{(m,e)} - eta_k ||_2^2
 
 ### Models Used
 
@@ -165,43 +162,41 @@ semantic enrichment benefit beyond the fixed evaluation point.
 
 ## Repository Structure
 
-```
-video-clustering-enrichment/
-|
-|-- code-llm_based_description_enrichment.ipynb   # Main pipeline (Google Colab)
-|-- requirements.txt                               # Python dependencies
-|-- README.md
-|-- LICENSE
-|
-|-- results/
-|   └── figures/
-|       |-- 08_hypothesis_testing_qwen.png
-|       |-- 08_hypothesis_testing_openai.png
-|       |-- 09_k_sensitivity_sidebyside_2embeddings.png
-|       └── 09_k_sensitivity_overlay_2embeddings.png
-|
-└── MSRVTT_Workspace/                  # Created automatically on Google Drive
-    |-- MSRVTT_Videos.zip              # MSR-VTT video files (user-provided)
-    |-- MSR_VTT.json                   # MSR-VTT annotation file (user-provided)
-    └── outputs/
-        |-- MSRVTT_base.csv
-        |-- MSRVTT_dados_multillm.csv
-        |-- embeddings/
-        |   |-- smolvlm_qwen_embeddings.npy
-        |   |-- smolvlm_openai_embeddings.npy
-        |   |-- gemini_qwen_embeddings.npy
-        |   └── ...
-        |-- stage2_smolvlm_checkpoint.csv
-        |-- stage3_llm_checkpoint.csv
-        |-- 06_summary_metrics_consolidated.csv
-        |-- 07_hypothesis_testing.csv
-        |-- 07_stats_summary_QWEN.csv
-        |-- 07_stats_summary_OPENAI.csv
-        |-- 09_k_sensitivity_QWEN.csv
-        |-- 09_k_sensitivity_OPENAI.csv
-        |-- embeddings_metadata.json
-        └── FINAL_REPORT.txt
-```
+    video-clustering-enrichment/
+    |
+    |-- code-llm_based_description_enrichment.ipynb   # Main pipeline (Google Colab)
+    |-- requirements.txt                               # Python dependencies
+    |-- README.md
+    |-- LICENSE
+    |
+    |-- results/
+    |   └── figures/
+    |       |-- 08_hypothesis_testing_qwen.png
+    |       |-- 08_hypothesis_testing_openai.png
+    |       |-- 09_k_sensitivity_sidebyside_2embeddings.png
+    |       └── 09_k_sensitivity_overlay_2embeddings.png
+    |
+    └── MSRVTT_Workspace/                  # Created automatically on Google Drive
+        |-- MSRVTT_Videos.zip              # MSR-VTT video files (user-provided)
+        |-- MSR_VTT.json                   # MSR-VTT annotation file (user-provided)
+        └── outputs/
+            |-- MSRVTT_base.csv
+            |-- MSRVTT_dados_multillm.csv
+            |-- embeddings/
+            |   |-- smolvlm_qwen_embeddings.npy
+            |   |-- smolvlm_openai_embeddings.npy
+            |   |-- gemini_qwen_embeddings.npy
+            |   └── ...
+            |-- stage2_smolvlm_checkpoint.csv
+            |-- stage3_llm_checkpoint.csv
+            |-- 06_summary_metrics_consolidated.csv
+            |-- 07_hypothesis_testing.csv
+            |-- 07_stats_summary_QWEN.csv
+            |-- 07_stats_summary_OPENAI.csv
+            |-- 09_k_sensitivity_QWEN.csv
+            |-- 09_k_sensitivity_OPENAI.csv
+            |-- embeddings_metadata.json
+            └── FINAL_REPORT.txt
 
 ---
 
@@ -218,8 +213,6 @@ video-clustering-enrichment/
 > with a T4 or A100 GPU runtime for the SmolVLM2 inference step (Cell 4).
 > All other cells can run on CPU.
 
----
-
 ### Option A — Google Colab (Recommended)
 
 #### 1. Open the notebook directly
@@ -230,96 +223,72 @@ video-clustering-enrichment/
 
 On your Google Drive, create the following folder structure and upload the dataset files:
 
-```
-MyDrive/
-└── MSRVTT_Workspace/
-    |-- MSRVTT_Videos.zip     <- MSR-VTT video archive
-    └── MSR_VTT.json          <- MSR-VTT annotation file
-```
+    MyDrive/
+    └── MSRVTT_Workspace/
+        |-- MSRVTT_Videos.zip     <- MSR-VTT video archive
+        └── MSR_VTT.json          <- MSR-VTT annotation file
 
 #### 3. Set your API key in Colab Secrets
 
 In the Colab sidebar, go to **Secrets** and add:
 
-```
-Name  : OPENROUTER_API_KEY
-Value : your_openrouter_key_here
-```
+    Name  : OPENROUTER_API_KEY
+    Value : your_openrouter_key_here
 
 #### 4. Run all cells in order
 
-```
-Cell 0  -> Install dependencies
-Cell 1  -> Imports + Config + Paths
-Cell 2  -> Utility functions
-Cell 3  -> Mount Drive + Build base CSV
-Cell 4  -> SmolVLM2 visual descriptions    <- GPU recommended
-Cell 5  -> LLM enrichment (async)          <- API calls
-Cell 6  -> Text embeddings (async)         <- API calls
-Cell 7  -> Feature preparation
-Cell 8  -> Multi-run KMeans clustering
-Cell 9  -> Wilcoxon tests + Cohen's d
-Cell 10 -> K-Sensitivity analysis
-Cell 11 -> Final export + report
-```
-
----
+    Cell 0  -> Install dependencies
+    Cell 1  -> Imports + Config + Paths
+    Cell 2  -> Utility functions
+    Cell 3  -> Mount Drive + Build base CSV
+    Cell 4  -> SmolVLM2 visual descriptions    <- GPU recommended
+    Cell 5  -> LLM enrichment (async)          <- API calls
+    Cell 6  -> Text embeddings (async)         <- API calls
+    Cell 7  -> Feature preparation
+    Cell 8  -> Multi-run KMeans clustering
+    Cell 9  -> Wilcoxon tests + Cohen's d
+    Cell 10 -> K-Sensitivity analysis
+    Cell 11 -> Final export + report
 
 ### Option B — Local Installation
 
 #### 1. Clone the repository
 
-```bash
-git clone https://github.com/julianoyugoshi/video-clustering-enrichment.git
-cd video-clustering-enrichment
-```
+    git clone https://github.com/julianoyugoshi/video-clustering-enrichment.git
+    cd video-clustering-enrichment
 
 #### 2. Create and activate a virtual environment
 
-```bash
-python -m venv venv
-source venv/bin/activate        # Linux/macOS
-# venv\Scripts\activate         # Windows
-```
+    python -m venv venv
+    source venv/bin/activate        # Linux/macOS
+    # venv\Scripts\activate         # Windows
 
 #### 3. Install dependencies
 
-```bash
-pip install -r requirements.txt
-```
+    pip install -r requirements.txt
 
 #### 4. Configure environment variables
 
 Create a `.env` file in the project root:
 
-```
-OPENROUTER_API_KEY=your_openrouter_key_here
-```
+    OPENROUTER_API_KEY=your_openrouter_key_here
 
 #### 5. Set up the workspace directories
 
-```bash
-mkdir -p MSRVTT_Workspace/outputs/embeddings
-mkdir -p results/figures
-```
+    mkdir -p MSRVTT_Workspace/outputs/embeddings
+    mkdir -p results/figures
 
 Place your dataset files in `MSRVTT_Workspace/`:
 
-```
-MSRVTT_Workspace/
-|-- MSRVTT_Videos.zip
-└── MSR_VTT.json
-```
+    MSRVTT_Workspace/
+    |-- MSRVTT_Videos.zip
+    └── MSR_VTT.json
 
 #### 6. Convert the notebook to a script (optional)
 
-```bash
-pip install jupyter nbconvert
-jupyter nbconvert --to script code-llm_based_description_enrichment.ipynb
-python code-llm_based_description_enrichment.py
-```
-
----
+    pip install jupyter nbconvert
+    jupyter nbconvert --to script code-llm_based_description_enrichment.ipynb
+    python code-llm_based_description_enrichment.py
 
 ### Skipping Heavy Processing Steps
 
@@ -334,7 +303,7 @@ To skip a stage, place the corresponding pre-computed file in `outputs/` before 
 | Cell 8 — Clustering stats | Both CSVs exist | `outputs/07_stats_summary_QWEN.csv` + `07_stats_summary_OPENAI.csv` |
 | Cell 10 — K-Sensitivity | All 4 files exist | `09_k_sensitivity_QWEN.csv`, `09_k_sensitivity_OPENAI.csv` + both PNGs |
 
-> Pre-computed checkpoints from the paper's experimental run can be shared upon request.
+> 📁 All pre-computed files from the paper's experimental run are available for download — see [Pre-computed Files](#pre-computed-files) below.
 
 ---
 
@@ -345,26 +314,22 @@ To skip a stage, place the corresponding pre-computed file in `outputs/` before 
 To validate the pipeline quickly without processing all videos,
 set `test_mode = True` in `ExperimentConfig` before running:
 
-```python
-# Cell 1 — ExperimentConfig
-config = ExperimentConfig(
-    test_mode=True,
-    test_sample_size=50,   # Use only 50 videos
-    n_runs=3               # Reduce to 3 clustering runs
-)
-```
+    # Cell 1 — ExperimentConfig
+    config = ExperimentConfig(
+        test_mode=True,
+        test_sample_size=50,   # Use only 50 videos
+        n_runs=3               # Reduce to 3 clustering runs
+    )
 
 ### Full experimental run
 
 Use the default configuration:
 
-```python
-config = ExperimentConfig(
-    n_runs=15,
-    n_clusters=20,
-    test_mode=False
-)
-```
+    config = ExperimentConfig(
+        n_runs=15,
+        n_clusters=20,
+        test_mode=False
+    )
 
 ---
 
@@ -409,6 +374,49 @@ After a complete run, the `outputs/` directory contains:
 
 ---
 
+## Pre-computed Files
+
+To skip the heavy processing steps, all pre-computed checkpoints, embeddings and outputs
+from the paper's experimental run are available for download:
+
+📁 **[Archives-LLMenrichment — Google Drive (read-only)](https://drive.google.com/drive/folders/SEU_LINK_AQUI)**
+
+After downloading, place the files in `MSRVTT_Workspace/outputs/` before running:
+
+    MSRVTT_Workspace/
+    └── outputs/
+        ├── MSRVTT_base.csv
+        ├── MSRVTT_dados_multillm.csv
+        ├── stage2_smolvlm_checkpoint.csv
+        ├── stage3_llm_checkpoint.csv
+        ├── 06_summary_metrics_consolidated.csv
+        ├── 07_hypothesis_testing.csv
+        ├── 07_stats_summary_QWEN.csv
+        ├── 07_stats_summary_OPENAI.csv
+        ├── 09_k_sensitivity_QWEN.csv
+        ├── 09_k_sensitivity_OPENAI.csv
+        ├── embeddings_metadata.json
+        ├── FINAL_REPORT.txt
+        └── embeddings/
+            ├── smolvlm_qwen_embeddings.npy
+            ├── smolvlm_openai_embeddings.npy
+            ├── gemini_qwen_embeddings.npy
+            ├── gemini_openai_embeddings.npy
+            ├── claude_qwen_embeddings.npy
+            ├── claude_openai_embeddings.npy
+            ├── llama_qwen_embeddings.npy
+            └── llama_openai_embeddings.npy
+
+| File | Skips Stage |
+|---|---|
+| `stage2_smolvlm_checkpoint.csv` | Cell 4 — SmolVLM2 descriptions |
+| `stage3_llm_checkpoint.csv` | Cell 5 — LLM enrichment |
+| `embeddings/*.npy` | Cell 6 — Text embeddings |
+| `07_stats_summary_QWEN/OPENAI.csv` | Cell 8 — Clustering stats |
+| `09_k_sensitivity_*.csv` + PNGs | Cell 10 — K-Sensitivity |
+
+---
+
 ## Dataset
 
 This work uses the **MSR-VTT** dataset:
@@ -419,12 +427,10 @@ This work uses the **MSR-VTT** dataset:
 
 **MSR-VTT categories (20):**
 
-```
-music, people, gaming, sports/actions, news/events/politics, education,
-tv shows, movie/comedy, animation, vehicles/autos, howto, travel,
-science/technology, animals/pets, kids/family, documentary,
-food/drink, cooking, beauty/fashion, advertisement
-```
+    music, people, gaming, sports/actions, news/events/politics, education,
+    tv shows, movie/comedy, animation, vehicles/autos, howto, travel,
+    science/technology, animals/pets, kids/family, documentary,
+    food/drink, cooking, beauty/fashion, advertisement
 
 ---
 
@@ -432,18 +438,16 @@ food/drink, cooking, beauty/fashion, advertisement
 
 If you use this code or findings in your research, please cite:
 
-```bibtex
-@inproceedings{yugoshi2026llm,
-  title        = {LLM-based Description Enrichment for Short Video Clustering},
-  author       = {Yugoshi, Juliano and Marcacini, Ricardo},
-  booktitle    = {Proceedings ,
-                  },
-  year         = {},
-  address      = {},
-  institution  = {Institute of Mathematics and Computer Science,
-                  University of Sao Paulo (ICMC-USP)}
-}
-```
+    @inproceedings{yugoshi2026llm,
+      title        = {LLM-based Description Enrichment for Short Video Clustering},
+      author       = {Yugoshi, Juliano and Marcacini, Ricardo},
+      booktitle    = {Proceedings of the Symposium on Knowledge Discovery,
+                      Mining and Learning (KDMiLe)},
+      year         = {2026},
+      address      = {Brazil},
+      institution  = {Institute of Mathematics and Computer Science,
+                      University of Sao Paulo (ICMC-USP)}
+    }
 
 ---
 
@@ -465,30 +469,29 @@ Models and infrastructure:
 
 This project is licensed under the MIT License.
 
-```
-MIT License
+    MIT License
 
-Copyright (c) 2026 Juliano Yugoshi, Ricardo Marcacini
-Institute of Mathematics and Computer Science
-University of Sao Paulo (ICMC-USP)
+    Copyright (c) 2026 Juliano Yugoshi, Ricardo Marcacini
+    Institute of Mathematics and Computer Science
+    University of Sao Paulo (ICMC-USP)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    THE SOFTWARE.
 
 <p align="center">
   Made with care at <strong>ICMC-USP</strong> — Sao Carlos, Brazil
