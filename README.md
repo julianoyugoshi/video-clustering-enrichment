@@ -41,22 +41,7 @@ statistically validated via paired Wilcoxon tests (p < 1e-3) and Cohen's d effec
 | (iv) | Statistical validation via **paired Wilcoxon Signed-Rank tests** and **Cohen's d effect size** across 15 independent runs |
 
 ---
-## Table of Contents
 
-- [Method](#method)
-- [Results](#results)
-- [Repository Structure](#repository-structure)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Configuration](#configuration)
-- [Generated Outputs](#generated-outputs)
-- [Pre-computed Files](#pre-computed-files)
-- [Dataset](#dataset)
-- [Citation](#citation)
-- [Acknowledgements](#acknowledgements)
-- [License](#license)
-
----
 ## Method
 
 ### Problem Definition
