@@ -4,7 +4,10 @@
 > Institute of Mathematics and Computer Science, University of São Paulo (ICMC-USP), Brazil<br>
 > `{juliano.yugoshi, ricardo.marcacini}@usp.br`
 
-[![Installation](https://img.shields.io/badge/🛠️-Installation-yellow?style=flat-square)](#installation)[![Usage](https://img.shields.io/badge/▶️-Usage-blue?style=flat-square)](#usage)[![Configuration](https://img.shields.io/badge/⚙️-Configuration-orange?style=flat-square)](#configuration)[![Generated Outputs](https://img.shields.io/badge/📁-Generated_Outputs-lightgrey?style=flat-square)](#generated-outputs)[![Pre-computed Files](https://img.shields.io/badge/💾-Pre--computed_Files-ff69b4?style=flat-square)](#pre-computed-files)[![Dataset](https://img.shields.io/badge/🗄️-Dataset-orange?style=flat-square)]([#dataset](#pre-computed-files))
+---
+
+[![Overview](https://img.shields.io/badge/📖-Overview-informational?style=flat-square)](#overview)[![Key Contributions](https://img.shields.io/badge/🏆-Key_Contributions-blueviolet?style=flat-square)](#key-contributions)[![Method](https://img.shields.io/badge/⚙️-Method-blueviolet?style=flat-square)](#method)
+[![Results](https://img.shields.io/badge/📊-Results-success?style=flat-square)](#results)[![Repository Structure](https://img.shields.io/badge/🗂️-Repository_Structure-lightgrey?style=flat-square)](#repository-structure)[![Installation](https://img.shields.io/badge/🛠️-Installation-yellow?style=flat-square)](#installation)[![Usage](https://img.shields.io/badge/▶️-Usage-blue?style=flat-square)](#usage)[![Configuration](https://img.shields.io/badge/⚙️-Configuration-orange?style=flat-square)](#configuration)[![Generated Outputs](https://img.shields.io/badge/📁-Generated_Outputs-lightgrey?style=flat-square)](#generated-outputs)[![Pre-computed Files](https://img.shields.io/badge/💾-Pre--computed_Files-ff69b4?style=flat-square)](#pre-computed-files)[![Dataset](https://img.shields.io/badge/🗄️-Dataset-orange?style=flat-square)](#dataset)[![Citation](https://img.shields.io/badge/📝-Citation-critical?style=flat-square)](#citation)[![License](https://img.shields.io/badge/⚖️-License-green?style=flat-square)](#license)
 
 ---
 
@@ -69,7 +72,7 @@ Before clustering, all feature vectors are standardized: `z = (x - mu) / sigma`.
 
 | Role | Model | Details |
 |---|---|---|
-| VLM Captioner | SmolVLM2-2.2B-Instruct | Frame-level visual description (1 fps, max 8 frames) |
+| VLM Captioner | SmolVLM2-2.2B-Instruct | Frame-level visual description (1 fps, max 64 frames) |
 | LLM Enrichment | google/gemini-2.5-flash | Via OpenRouter API |
 | LLM Enrichment | anthropic/claude-3-haiku | Via OpenRouter API |
 | LLM Enrichment | meta-llama/llama-3.3-70b-instruct | Via OpenRouter API |
@@ -137,18 +140,35 @@ semantic enrichment benefit beyond the fixed evaluation point.
 
 ---
 
-MSRVTT_Workspace/                  # Created automatically on Google Drive
-    |-- MSRVTT_Videos.zip              # MSR-VTT video files (#pre-computed-files)
-    |-- MSR_VTT.json                   # MSR-VTT annotation file (#pre-computed-files)
+## Repository Structure
+
+```
+video-clustering-enrichment/
+|
+|-- code-llm_based_description_enrichment.ipynb    # Method implemented (Google Colab)
+|-- requirements.txt                               # Python dependencies
+|-- README.md
+|-- LICENSE
+|
+|-- results/
+|   └── figures/
+|       |-- 08_hypothesis_testing_qwen.png
+|       |-- 08_hypothesis_testing_openai.png
+|       |-- 09_k_sensitivity_sidebyside_2embeddings.png
+|       └── 09_k_sensitivity_overlay_2embeddings.png
+|
+└── MSRVTT_Workspace/                  # Created automatically on Google Drive
+    |-- MSRVTT_Videos.zip              # MSR-VTT video files (user-provided)
+    |-- MSR_VTT.json                   # MSR-VTT annotation file (user-provided)
     └── outputs/
-        |-- MSRVTT_base.csv
+        |-- MSRVTT_base.csv            # Includes desc_smolvlm field (SmolVLM2 output)
         |-- MSRVTT_dados_multillm.csv
         |-- embeddings/
         |   |-- smolvlm_qwen_embeddings.npy
         |   |-- smolvlm_openai_embeddings.npy
         |   |-- gemini_qwen_embeddings.npy
         |   └── ...
-        |-- inference_checkpoint.csv      
+        |-- inference_checkpoint.csv
         |-- 06_summary_metrics_consolidated.csv
         |-- 07_hypothesis_testing.csv
         |-- 07_stats_summary_QWEN.csv
@@ -157,6 +177,7 @@ MSRVTT_Workspace/                  # Created automatically on Google Drive
         |-- 09_k_sensitivity_OPENAI.csv
         |-- embeddings_metadata.json
         └── FINAL_REPORT.txt
+```
 
 ---
 
@@ -182,116 +203,94 @@ MSRVTT_Workspace/                  # Created automatically on Google Drive
 #### 2. Set up Google Drive workspace
 
 On your Google Drive, create the following folder structure and upload the dataset files:
-> 💡 Instead of uploading manually, you can copy `MSRVTT_Videos.zip` and  `MSR_VTT.json` directly from the [Archives-LLMenrichment folder](#pre-computed-files) to your Drive workspace.
+> 💡 Instead of uploading manually, you can copy `MSRVTT_Videos.zip` and `MSR_VTT.json` directly from the [Archives-LLMenrichment folder](#pre-computed-files) to your Drive workspace.
 
-    MyDrive/
-    └── MSRVTT_Workspace/
-        |-- MSRVTT_Videos.zip     <- MSR-VTT video archive
-        └── MSR_VTT.json          <- MSR-VTT annotation file
-
-#### 3. Set your API key in Colab Secrets
-
-In the Colab sidebar, go to **Secrets** and add:
-
-    Name  : OPENROUTER_API_KEY
-    Value : your_openrouter_key_here
-
-#### 4. Run all cells in order
-
-    Cell 0  -> Install dependencies
-    Cell 1  -> Imports + Config + Paths
-    Cell 2  -> Utility functions
-    Cell 3  -> Mount Drive + Build base CSV
-    Cell 4  -> SmolVLM2 visual descriptions    <- GPU recommended
-    Cell 5  -> LLM enrichment (async)          <- API calls
-    Cell 6  -> Text embeddings (async)         <- API calls
-    Cell 7  -> Feature preparation
-    Cell 8  -> Multi-run KMeans clustering
-    Cell 9  -> Wilcoxon tests + Cohen's d
-    Cell 10 -> K-Sensitivity analysis
-    Cell 11 -> Final export + report
-
-### Option B — Local Installation
-
-#### 1. Clone the repository
-
-    git clone https://github.com/julianoyugoshi/video-clustering-enrichment.git
-    cd video-clustering-enrichment
-
-#### 2. Create and activate a virtual environment
-
-    python -m venv venv
-    source venv/bin/activate        # Linux/macOS
-    # venv\Scripts\activate         # Windows
-
-=======
-
-    MyDrive/
-    └── MSRVTT_Workspace/
-        |-- MSRVTT_Videos.zip     <- MSR-VTT video archive
-        └── MSR_VTT.json          <- MSR-VTT annotation file
+```
+MyDrive/
+└── MSRVTT_Workspace/
+    |-- MSRVTT_Videos.zip     <- MSR-VTT video archive
+    └── MSR_VTT.json          <- MSR-VTT annotation file
+```
 
 #### 3. Set your API key in Colab Secrets
 
 In the Colab sidebar, go to **Secrets** and add:
 
-    Name  : OPENROUTER_API_KEY
-    Value : your_openrouter_key_here
+```
+Name  : OPENROUTER_API_KEY
+Value : your_openrouter_key_here
+```
 
 #### 4. Run all cells in order
 
-    Cell 0  -> Install dependencies
-    Cell 1  -> Imports + Config + Paths
-    Cell 2  -> Utility functions
-    Cell 3  -> Mount Drive + Build base CSV
-    Cell 4  -> SmolVLM2 visual descriptions    <- GPU recommended
-    Cell 5  -> LLM enrichment (async)          <- API calls
-    Cell 6  -> Text embeddings (async)         <- API calls
-    Cell 7  -> Feature preparation
-    Cell 8  -> Multi-run KMeans clustering
-    Cell 9  -> Wilcoxon tests + Cohen's d
-    Cell 10 -> K-Sensitivity analysis
-    Cell 11 -> Final export + report
+```
+Cell 0  -> Install dependencies
+Cell 1  -> Imports + Config + Paths
+Cell 2  -> Utility functions
+Cell 3  -> Mount Drive + Build base CSV
+Cell 4  -> SmolVLM2 visual descriptions    <- GPU recommended
+Cell 5  -> LLM enrichment (async)          <- API calls
+Cell 6  -> Text embeddings (async)         <- API calls
+Cell 7  -> Feature preparation
+Cell 8  -> Multi-run KMeans clustering
+Cell 9  -> Wilcoxon tests + Cohen's d
+Cell 10 -> K-Sensitivity analysis
+Cell 11 -> Final export + report
+```
 
 ### Option B — Local Installation
 
 #### 1. Clone the repository
 
-    git clone https://github.com/julianoyugoshi/video-clustering-enrichment.git
-    cd video-clustering-enrichment
+```
+git clone https://github.com/julianoyugoshi/video-clustering-enrichment.git
+cd video-clustering-enrichment
+```
 
 #### 2. Create and activate a virtual environment
 
-    python -m venv venv
-    source venv/bin/activate        # Linux/macOS
-    # venv\Scripts\activate         # Windows
+```
+python -m venv venv
+source venv/bin/activate        # Linux/macOS
+# venv\Scripts\activate         # Windows
+```
 
 #### 3. Install dependencies
 
-    pip install -r requirements.txt
+```
+pip install -r requirements.txt
+```
 
 #### 4. Configure environment variables
 
 Create a `.env` file in the project root:
 
-    OPENROUTER_API_KEY=your_openrouter_key_here
+```
+OPENROUTER_API_KEY=your_openrouter_key_here
+```
 
 #### 5. Set up the workspace directories
 
-    mkdir -p MSRVTT_Workspace/outputs/embeddings
-    mkdir -p results/figures
+```
+mkdir -p MSRVTT_Workspace/outputs/embeddings
+mkdir -p results/figures
+```
 
 Place your dataset files in `MSRVTT_Workspace/`:
 
-    MSRVTT_Workspace/
-    |-- MSRVTT_Videos.zip
-    └── MSR_VTT.json
+```
+MSRVTT_Workspace/
+|-- MSRVTT_Videos.zip
+└── MSR_VTT.json
+```
 
 #### 6. Convert the notebook to a script (optional)
 
-    pip install jupyter nbconvert
-    jupyter nbconvert --to script code-llm_based_description_enrichment.ipynb
-    python code-llm_based_description_enrichment.py
+```
+pip install jupyter nbconvert
+jupyter nbconvert --to script code-llm_based_description_enrichment.ipynb
+python code-llm_based_description_enrichment.py
+```
 
 ### Skipping Heavy Processing Steps
 
@@ -300,12 +299,11 @@ To skip a stage, place the corresponding pre-computed file in `outputs/` before 
 
 | Stage | Skip Condition | File Required |
 |---|---|---|
-| Cell 4 — SmolVLM2 descriptions | Campo `desc_smolvlm` preenchido no CSV | `outputs/MSRVTT_base.csv` (with the desc_smolvlm field already populated) |
+| Cell 4 — SmolVLM2 descriptions | field `desc_smolvlm` populated in the CSV | `outputs/MSRVTT_base.csv` (with the field `desc_smolvlm` already populated) |
 | Cell 5 — LLM enrichment | File exists | `outputs/inference_checkpoint.csv` |
 | Cell 6 — Text embeddings | All .npy files exist | `outputs/embeddings/{source}_{model}_embeddings.npy` |
 | Cell 8 — Clustering stats | Both CSVs exist | `outputs/07_stats_summary_QWEN.csv` + `07_stats_summary_OPENAI.csv` |
 | Cell 10 — K-Sensitivity | All 4 files exist | `09_k_sensitivity_QWEN.csv`, `09_k_sensitivity_OPENAI.csv` + both PNGs |
-
 
 > 📁 All pre-computed files from the paper's experimental run are available for download — see [Pre-computed Files](#pre-computed-files) below.
 
@@ -318,22 +316,26 @@ To skip a stage, place the corresponding pre-computed file in `outputs/` before 
 To validate the pipeline quickly without processing all videos,
 set `test_mode = True` in `ExperimentConfig` before running:
 
-    # Cell 1 — ExperimentConfig
-    config = ExperimentConfig(
-        test_mode=True,
-        test_sample_size=50,   # Use only 50 videos
-        n_runs=3               # Reduce to 3 clustering runs
-    )
+```python
+# Cell 1 — ExperimentConfig
+config = ExperimentConfig(
+    test_mode=True,
+    test_sample_size=50,   # Use only 50 videos
+    n_runs=3               # Reduce to 3 clustering runs
+)
+```
 
 ### Full experimental run
 
 Use the default configuration:
 
-    config = ExperimentConfig(
-        n_runs=15,
-        n_clusters=20,
-        test_mode=False
-    )
+```python
+config = ExperimentConfig(
+    n_runs=15,
+    n_clusters=20,
+    test_mode=False
+)
+```
 
 ---
 
@@ -360,10 +362,10 @@ After a complete run, the `outputs/` directory contains:
 
 | File | Description |
 |---|---|
-| `MSRVTT_base.csv` | Base dataset com video IDs, categories, human captions and **SmolVLM2 descriptions** (campo `desc_smolvlm`) |
+| `MSRVTT_base.csv` | Base dataset com video IDs, categories, human captions e **SmolVLM2 descriptions** (field `desc_smolvlm`) |
 | `MSRVTT_dados_multillm.csv` | Full dataset with SmolVLM2 + all LLM enriched descriptions |
 | `embeddings/{source}_{model}_embeddings.npy` | Text embedding arrays (8 files total) |
-| `inference_checkpoint.csv` | Checkpoint do LLM enrichment (era `stage3_llm_checkpoint.csv`) |
+| `inference_checkpoint.csv` | Checkpoint do LLM enrichment (Cell 5) |
 | `00_llm_predicted_categories_validation.csv` | LLM category prediction validity rates |
 | `00_llm_categories_vs_groundtruth.csv` | LLM category hit rate vs. ground truth |
 | `06_summary_metrics_consolidated.csv` | NMI/ARI statistics for all configurations |
@@ -377,7 +379,6 @@ After a complete run, the `outputs/` directory contains:
 | `embeddings_metadata.json` | Metadata for reproducibility |
 | `FINAL_REPORT.txt` | Full experiment summary with all tables |
 
-
 ---
 
 ## Pre-computed Files
@@ -385,44 +386,44 @@ After a complete run, the `outputs/` directory contains:
 To skip the heavy processing steps, all pre-computed checkpoints, embeddings and outputs
 from the paper's experimental run are available for download:
 
-
 📁 **[Archives-LLMenrichment — Google Drive (read-only)](https://drive.google.com/drive/folders/1HyXYqyRVwhKU84PVjFI01HqYkDo61enR?usp=sharing)**
 
 After downloading, place the files in `MSRVTT_Workspace/outputs/` before running:
 
-    MSRVTT_Workspace/
-    |-- MSRVTT_Videos.zip
-    └── MSR_VTT.json
-    └── outputs/
-        ├── MSRVTT_base.csv                    ← inclui desc_smolvlm já populado
-        ├── MSRVTT_dados_multillm.csv
-        ├── inference_checkpoint.csv           ← era stage3_llm_checkpoint.csv
-        ├── 06_summary_metrics_consolidated.csv
-        ├── 07_hypothesis_testing.csv
-        ├── 07_stats_summary_QWEN.csv
-        ├── 07_stats_summary_OPENAI.csv
-        ├── 09_k_sensitivity_QWEN.csv
-        ├── 09_k_sensitivity_OPENAI.csv
-        ├── embeddings_metadata.json
-        ├── FINAL_REPORT.txt
-        └── embeddings/
-            ├── smolvlm_qwen_embeddings.npy
-            ├── smolvlm_openai_embeddings.npy
-            ├── gemini_qwen_embeddings.npy
-            ├── gemini_openai_embeddings.npy
-            ├── claude_qwen_embeddings.npy
-            ├── claude_openai_embeddings.npy
-            ├── llama_qwen_embeddings.npy
-            └── llama_openai_embeddings.npy
+```
+MSRVTT_Workspace/
+|-- MSRVTT_Videos.zip
+|-- MSR_VTT.json
+└── outputs/
+    |-- MSRVTT_base.csv                    
+    |-- MSRVTT_dados_multillm.csv
+    |-- inference_checkpoint.csv
+    |-- 06_summary_metrics_consolidated.csv
+    |-- 07_hypothesis_testing.csv
+    |-- 07_stats_summary_QWEN.csv
+    |-- 07_stats_summary_OPENAI.csv
+    |-- 09_k_sensitivity_QWEN.csv
+    |-- 09_k_sensitivity_OPENAI.csv
+    |-- embeddings_metadata.json
+    |-- FINAL_REPORT.txt
+    └── embeddings/
+        |-- smolvlm_qwen_embeddings.npy
+        |-- smolvlm_openai_embeddings.npy
+        |-- gemini_qwen_embeddings.npy
+        |-- gemini_openai_embeddings.npy
+        |-- claude_qwen_embeddings.npy
+        |-- claude_openai_embeddings.npy
+        |-- llama_qwen_embeddings.npy
+        └── llama_openai_embeddings.npy
+```
 
 | File | Skips Stage |
 |---|---|
 | `MSRVTT_base.csv` (com `desc_smolvlm` populado) | Cell 4 — SmolVLM2 descriptions |
-| `inference_checkpoint.csv`                       | Cell 5 — LLM enrichment |
-| `embeddings/*.npy`                               | Cell 6 — Text embeddings |
-| `07_stats_summary_QWEN/OPENAI.csv`               | Cell 8 — Clustering stats |
-| `09_k_sensitivity_*.csv` + PNGs                  | Cell 10 — K-Sensitivity |
-
+| `inference_checkpoint.csv` | Cell 5 — LLM enrichment |
+| `embeddings/*.npy` | Cell 6 — Text embeddings |
+| `07_stats_summary_QWEN/OPENAI.csv` | Cell 8 — Clustering stats |
+| `09_k_sensitivity_*.csv` + PNGs | Cell 10 — K-Sensitivity |
 
 ---
 
@@ -434,19 +435,22 @@ This work uses the **MSR-VTT** dataset:
 - **Annotations:** Human captions + category labels
 - **Access:** [MSR-VTT at Microsoft Research](https://www.microsoft.com/en-us/research/publication/msr-vtt-a-large-video-description-dataset-for-bridging-video-and-language/)
 
+> 💡 Instead of uploading manually, you can copy `MSRVTT_Videos.zip` directly from the [Archives-LLMenrichment folder](#pre-computed-files) to your Drive workspace.
+
 **MSR-VTT categories (20):**
 
-    music, people, gaming, sports/actions, news/events/politics, education,
-    tv shows, movie/comedy, animation, vehicles/autos, howto, travel,
-    science/technology, animals/pets, kids/family, documentary,
-    food/drink, cooking, beauty/fashion, advertisement
+```
+music, people, gaming, sports/actions, news/events/politics, education,
+tv shows, movie/comedy, animation, vehicles/autos, howto, travel,
+science/technology, animals/pets, kids/family, documentary,
+food/drink, cooking, beauty/fashion, advertisement
+```
 
 ---
 
 ## Citation
 
 If you use this code or findings in your research, please cite:
-
 
 ---
 
@@ -463,29 +467,31 @@ This work was carried out at:
 
 This project is licensed under the MIT License.
 
-    MIT License
+```
+MIT License
 
-    Copyright (c) 2026 Juliano Yugoshi, Ricardo Marcacini
-    Institute of Mathematics and Computer Science
-    University of Sao Paulo (ICMC-USP)
+Copyright (c) 2026 Juliano Yugoshi, Ricardo Marcacini
+Institute of Mathematics and Computer Science
+University of Sao Paulo (ICMC-USP)
 
-    Permission is hereby granted, free of charge, to any person obtaining a copy
-    of this software and associated documentation files (the "Software"), to deal
-    in the Software without restriction, including without limitation the rights
-    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-    copies of the Software, and to permit persons to whom the Software is
-    furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-    The above copyright notice and this permission notice shall be included in all
-    copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-    THE SOFTWARE.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+```
 
 <p align="center">
   Made with care at <strong>ICMC-USP</strong> — Sao Carlos, Brazil
