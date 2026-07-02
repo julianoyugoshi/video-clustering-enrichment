@@ -198,7 +198,7 @@ video-clustering-enrichment/
 
 #### 1. Open the notebook directly
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1bp7nTGCt1mV5ayxkgSpS5SltCM-d23GB)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/)
 
 #### 2. Set up Google Drive workspace
 
