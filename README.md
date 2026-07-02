@@ -387,6 +387,8 @@ from the paper's experimental run are available for download:
 After downloading, place the files in `MSRVTT_Workspace/outputs/` before running:
 
     MSRVTT_Workspace/
+    ├── MSRVTT_Videos.zip 
+    ├── MSR_VTT.json 
     └── outputs/
         ├── MSRVTT_base.csv
         ├── MSRVTT_dados_multillm.csv
