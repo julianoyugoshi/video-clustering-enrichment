@@ -222,8 +222,7 @@ semantic enrichment benefit beyond the fixed evaluation point.
 #### 2. Set up Google Drive workspace
 
 On your Google Drive, create the following folder structure and upload the dataset files:
-> 💡 Instead of uploading manually, you can copy `MSRVTT_Videos.zip` and  
-> `MSR_VTT.json` directly from the  
+> 💡 Instead of uploading manually, you can copy `MSRVTT_Videos.zip` and  `MSR_VTT.json` directly from the  
 > [Archives-LLMenrichment folder](#pre-computed-files) to your Drive workspace.  
 
     MyDrive/
