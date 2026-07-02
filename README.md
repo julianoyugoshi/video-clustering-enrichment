@@ -6,8 +6,8 @@
 
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Dataset: MSR-VTT](https://img.shields.io/badge/Dataset-MSR--VTT-orange.svg)](https://www.microsoft.com/en-us/research/publication/msr-vtt-a-large-video-description-dataset-for-bridging-video-and-language/)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1bp7nTGCt1mV5ayxkgSpS5SltCM-d23GB)
+[![Dataset: MSR-VTT](https://img.shields.io/badge/Dataset-MSR--VTT-orange.svg)](https://drive.google.com/file/d/1C0r5WHKiTLYWxZkZI8DKpsN5Mj9s3Z1x/view?usp=sharing/)
+
 
 ---
 
@@ -141,8 +141,8 @@ semantic enrichment benefit beyond the fixed evaluation point.
 ---
 
 MSRVTT_Workspace/                  # Created automatically on Google Drive
-    |-- MSRVTT_Videos.zip              # MSR-VTT video files (user-provided)
-    |-- MSR_VTT.json                   # MSR-VTT annotation file (user-provided)
+    |-- MSRVTT_Videos.zip              # MSR-VTT video files (#pre-computed-files)
+    |-- MSR_VTT.json                   # MSR-VTT annotation file (#pre-computed-files)
     └── outputs/
         |-- MSRVTT_base.csv
         |-- MSRVTT_dados_multillm.csv
