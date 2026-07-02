@@ -322,7 +322,7 @@ To skip a stage, place the corresponding pre-computed file in `outputs/` before 
 
 | Stage | Skip Condition | File Required |
 |---|---|---|
-| Cell 4 — SmolVLM2 descriptions | Campo `desc_smolvlm` preenchido no CSV | `outputs/MSRVTT_base.csv` (com campo `desc_smolvlm` já populado) |
+| Cell 4 — SmolVLM2 descriptions | Campo `desc_smolvlm` preenchido no CSV | `outputs/MSRVTT_base.csv` (with the desc_smolvlm field already populated) |
 | Cell 5 — LLM enrichment | File exists | `outputs/inference_checkpoint.csv` |
 | Cell 6 — Text embeddings | All .npy files exist | `outputs/embeddings/{source}_{model}_embeddings.npy` |
 | Cell 8 — Clustering stats | Both CSVs exist | `outputs/07_stats_summary_QWEN.csv` + `07_stats_summary_OPENAI.csv` |
